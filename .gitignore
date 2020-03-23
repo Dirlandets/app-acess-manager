@@ -10,3 +10,4 @@ backend/reports/mypy
 backend/reports/coverage
 env/**/secrets.env
 backend/files
+*.swp
