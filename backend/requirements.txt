@@ -1,0 +1,11 @@
+Django==2.2.7
+django-cors-headers
+django-debug-toolbar
+djangorestframework
+djangorestframework-simplejwt
+flake8
+gunicorn
+mypy
+psycopg2-binary
+django-stubs
+djangorestframework-stubs

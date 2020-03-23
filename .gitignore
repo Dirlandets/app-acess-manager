@@ -1,0 +1,12 @@
+backend/src/media/*
+__pycache__
+backend/src/**/__pycache__/
+backend/src/*/migrations/*.py
+!backend/src/*/migrations/__init__.py
+*.code-workspace
+*.vscode
+.mypy_cache
+backend/reports/mypy
+backend/reports/coverage
+env/**/secrets.env
+backend/files
