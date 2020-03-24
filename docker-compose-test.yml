@@ -21,7 +21,7 @@ services:
 
   nginx:
     restart: always 
-    build: ./server
+    build: ./nginx
     ports:
       - 80:80
     volumes:

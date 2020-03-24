@@ -1,0 +1,39 @@
+upstream backend {
+    server backend:8000;
+}
+
+
+server {
+    listen	80;
+    server_name "";
+    return	444;
+}
+
+server {
+    server_name www.${NGINX_HOST};
+    return 301 http://${NGINX_HOST};
+}
+
+
+server {
+    server_name ${NGINX_HOST};
+    client_max_body_size 75m;
+    charset utf-8;
+    
+    location / {
+        # api is passed to Gunicorn (djangoapp)
+        proxy_pass http://backend;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+    location /files/ {
+        alias /web/app/files/static/;
+    }
+
+    location /media/ {
+        alias /web/app/files/media/;
+    }
+
+}
