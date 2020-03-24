@@ -29,9 +29,9 @@ INSTALLED_APPS = [
 
     # API stuff
     'rest_framework',
+
     'corsheaders',
     'api',
-
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ CORS_ALLOW_METHODS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
