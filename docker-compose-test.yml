@@ -8,8 +8,10 @@ services:
       - static_volume:/web/app/files/static  # <-- bind the static volume
       - media_volume:/web/app/files/media  # <-- bind the media volume
     env_file: 
-      - ./env/prod/backend.env
-      - ./env/prod/db.env
+      - ./env/dev/backend.env
+      - ./env/dev/db.env
+    environment:
+      - ENV=PROD
     networks:
       - nginx_network
       - database_network
@@ -28,14 +30,14 @@ services:
     networks:
       - nginx_network
     env_file: 
-      - ./env/prod/server.env
+      - ./env/dev/server.env
     command: /bin/bash -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/project.template > /etc/nginx/conf.d/project.conf && cat /etc/nginx/conf.d/project.conf && exec nginx -g 'daemon off;'"
 
   database:
     restart: always
     image: postgres:12
     env_file: 
-      - ./env/prod/db.env
+      - ./env/dev/db.env
     volumes:
       - database_data:/var/lib/postgresql/data/
     networks:
