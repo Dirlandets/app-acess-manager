@@ -7,7 +7,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && python -m pip install --upgrade pip \
     && python -m pip install -r /web/app/requirements.txt \
-    && apt-get purge -y --auto-remove gcc
+    && apt-get purge -y --auto-remove gcc \
+    && mkdir static 
 
 WORKDIR /web/app/src
 
