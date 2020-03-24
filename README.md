@@ -29,16 +29,14 @@
 `docker-compose -f docker-compose-dev.yml up --build`
 
 #### Мигрируем:
-docker-compose -f docker-compose-dev.yml exec backend python manage.py makemigrations
-
-docker-compose -f docker-compose-dev.yml exec backend python manage.py migrate
+`docker-compose -f docker-compose-dev.yml exec backend python manage.py makemigrations`
+`docker-compose -f docker-compose-dev.yml exec backend python manage.py migrate`
 
 #### Грузим подготовленных пользователей и приложения
-docker-compose -f docker-compose-dev.yml exec backend python manage.py loaddata db.json
+`docker-compose -f docker-compose-dev.yml exec backend python manage.py loaddata db.json`
 
 ##### Запустить тесты:
-docker-compose -f docker-compose-dev.yml exec backend python manage.py test
-
+`docker-compose -f docker-compose-dev.yml exec backend python manage.py test`
 
 ### Авторизация: 
 Пользователи:
