@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import ApplicationsView
+from .views import ApplicationView, ApplicationListView
 
 urlpatterns = [
-    path('', ApplicationsView.as_view()),
+    path('', ApplicationListView.as_view()),
+    path('<pk>/', ApplicationView.as_view()),
 ]
