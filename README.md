@@ -26,7 +26,7 @@
 ## Результат выполнения задачи:
 ### Инструкция по разворачиванию приложения (в docker или локально)
 #### Поднять локально на 127.0.0.1:8000 
-docker-compose -f docker-compose-dev.yml up --build
+`docker-compose -f docker-compose-dev.yml up --build`
 
 #### Мигрируем:
 docker-compose -f docker-compose-dev.yml exec backend python manage.py makemigrations
