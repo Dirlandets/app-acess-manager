@@ -127,3 +127,35 @@ class TestRetreveView(TestCase):
         )
         jsn = response.json()
         self.assertEqual(str(old_key), jsn['api_key'])
+
+     
+class TestUpdateToken(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.superuser = User.objects.create(username='megauser', is_superuser=True)
+        self.superuser_app = Application.objects.create(
+            name='SuperuserApp',
+            owner=self.superuser
+        )
+        self.user_1 = User.objects.create(username='user1')
+        self.user_1_app = Application.objects.create(
+            name='user_1_App',
+            owner=self.user_1
+        )
+        self.user_2 = User.objects.create(username='user2')
+        self.user_2_app = Application.objects.create(
+            name='user_2_App',
+            owner=self.user_2
+        )
+
+    def test_can_refresh_token(self):
+        self.client.force_login(self.user_1)
+        old_key = self.user_1_app.api_key
+        response = self.client.get(f'/api/{self.user_1_app.pk}/refresh/', content_type='application/json', follow=True)
+        jsn = response.json()
+        self.assertNotEqual(str(old_key), jsn['api_key'])
+
+    def test_redirect_after_refresh_token(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(f'/api/{self.user_1_app.pk}/refresh/', content_type='application/json', follow=True)
+        self.assertEqual(response.redirect_chain[0], (f'/api/{self.user_1_app.pk}/', 302))
